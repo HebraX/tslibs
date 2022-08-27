@@ -16,7 +16,8 @@ Manager = {
     CreateVisuals = {
         ["Name"] = function(Args)
             if not Args.Text then
-                Args.Text = Args.Object.Name
+                local PlayerName = Players:GetNameFromUserIdAsync(tonumber(Args.Object.Name))
+                Args.Text = Players:FindFirstChild(PlayerName) and (PlayerName or Args.Object.Name .. " [FAILED TO GET USERNAME]") or "Sleeper: " .. (PlayerName or Args.Object.Name .. " [FAILED TO GET USERNAME]")
             end
 
             if Args.Object and Args.Object.Parent ~= nil then else
