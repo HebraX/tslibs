@@ -140,5 +140,24 @@ workspace.Players.ChildAdded:Connect(function(Character)
         end
     end
 end)
+for _,Character in next, workspace.Players:GetChildren() do
+    repeat
+        task.wait()
+    until Character:FindFirstChild("Humanoid") and Character.PrimaryPart and Character:FindFirstChild("Head")
+
+    table.insert(Manager.Objects["Players"], Character)
+
+    if Manager.Settings["Players"] then
+        for i,v in pairs(Manager.Settings["Players"]) do
+            if v.Enabled then
+                Manager.CreateVisuals[i]({
+                    Object = Character,
+                    Visuals = Manager.Visuals["Players"][i],
+                    Settings = Manager.Settings["Players"][i]
+                })
+            end
+        end
+    end
+end
 
 return Manager
